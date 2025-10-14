@@ -13,7 +13,7 @@ for(let i=0; i<wordLen; i++){
     newDiv.classList.add(divClass);
     newDiv.classList.add("box");
 
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".innerContainer");
     container.appendChild(newDiv);
 
     let newPara = document.createElement('p');
@@ -33,12 +33,27 @@ document.addEventListener("keypress", function(event){
     
     for (let i = 0; i < wordLen; i++) {
         if (alpha == randomWord[i]){
-            const pAlpha = document.querySelector(`.p${i}`);
-            console.log(pAlpha)
-            
+            const pAlpha = document.querySelector(`.p${i}`);            
             pAlpha.textContent = alpha;
+            val = true;
         }
         
     }
 
 });
+
+for (let i = 0; i < 26; i++) {
+    document.querySelectorAll(".alpha")[i].addEventListener("click", function(event){
+    let clickAlpha = event.target.innerHTML;    
+        for (let i = 0; i < wordLen; i++) {
+            if (clickAlpha == randomWord[i]){
+                const pAlpha = document.querySelector(`.p${i}`);            
+                pAlpha.textContent = clickAlpha;
+                val = true;
+            }
+        
+        }
+    
+});
+    
+}
