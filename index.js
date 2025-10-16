@@ -5,6 +5,8 @@ let wordList = ["apple", "ball", "cat", "dog", "fish", "chair", "table", "phone"
 let index = Math.floor(Math.random()*30);
 let randomWord = wordList[index];
 let wordLen = randomWord.length;
+let chances = 5;
+let pressedKeys = [];
 
 for(let i=0; i<wordLen; i++){
     let newDiv = document.createElement('div');
@@ -30,7 +32,9 @@ for(let i=0; i<wordLen; i++){
 document.addEventListener("keypress", function(event){
     let alpha = event.key;
     let val = false;
-    
+    pressedKeys.push(alpha);
+
+    console.log(pressedKeys);
     for (let i = 0; i < wordLen; i++) {
         if (alpha == randomWord[i]){
             const pAlpha = document.querySelector(`.p${i}`);            
@@ -39,12 +43,25 @@ document.addEventListener("keypress", function(event){
         }
         
     }
+    if (val == false){
+            chances -= 1;
+            console.log(chances);
+            let h3 = document.querySelector("h2");
+            h3.textContent = `Chances: ${chances}`;
+            if (chances == 0){
+                window.location.reload();
+            }
+    }
+    let element = document.querySelector(`.${alpha}`);
+    element.classList.add("visible");
 
 });
 
 for (let i = 0; i < 26; i++) {
     document.querySelectorAll(".alpha")[i].addEventListener("click", function(event){
-    let clickAlpha = event.target.innerHTML;    
+    let clickAlpha = event.target.innerHTML;
+    let val = false;
+
         for (let i = 0; i < wordLen; i++) {
             if (clickAlpha == randomWord[i]){
                 const pAlpha = document.querySelector(`.p${i}`);            
@@ -53,7 +70,17 @@ for (let i = 0; i < 26; i++) {
             }
         
         }
+        if (val == false){
+            chances -= 1;
+            console.log(chances);
+            let h3 = document.querySelector("h2");
+            h3.textContent = `Chances: ${chances}`;
+            if (chances == 0){
+                window.location.reload();
+            }
     
-});
+        }
+        
+    });
     
 }
